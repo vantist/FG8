@@ -1,0 +1,31 @@
+{
+  "name": "FG8",
+  "version": "0.0.1",
+  "homepage": "https://github.com/vantist/FG8",
+  "authors": [
+    "Vantist",
+    "Amobe",
+    "Shopping"
+  ],
+  "description": "Fxckin Good 8Comic",
+  "main": "index.html",
+  "keywords": [
+    "fuckin",
+    "good",
+    "8comic"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~0.5.2",
+    "core-elements": "Polymer/core-elements#~0.5.2",
+    "paper-tabs": "Polymer/paper-tabs#~0.5.2"
+  }
+}

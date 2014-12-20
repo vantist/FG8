@@ -1,1 +1,22 @@
-/bin/
+.DS_Store
+
+# eclipse project file
+.classpath
+.project
+.settings
+
+# tmp file
+*.tmp
+tmp/
+
+# java build file
+*.jar
+*.war
+*.ear
+*.class
+build/
+bin/
+
+# gradle
+.gradle/
+.gradle
