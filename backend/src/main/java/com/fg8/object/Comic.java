@@ -1,4 +1,4 @@
-package com.fg8.utils;
+package com.fg8.object;
 
 public class Comic {
 	private String name;

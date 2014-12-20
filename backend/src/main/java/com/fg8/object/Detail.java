@@ -1,7 +1,10 @@
-package com.fg8.utils;
+package com.fg8.object;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.fg8.utils.RegUtil;
+import com.fg8.utils.WebUtil;
 
 public class Detail {
 
@@ -27,15 +30,15 @@ public class Detail {
 		return WebUtil.getUrlContent(detailUrl);
 	}
 	
-	private List<String> getUrlList(String content) {
-		List<String> replaceRegexList = new ArrayList<String>();
-		replaceRegexList.add("cview\\('");
-		replaceRegexList.add("\\);return false;");
-		
-		String pattern = "cview\\(([^<]*?)\\);return false;"; 
-		
-		return RegUtil.getRegexList(content, pattern, replaceRegexList, "");
-	}
+//	private List<String> getUrlList(String content) {
+//		List<String> replaceRegexList = new ArrayList<String>();
+//		replaceRegexList.add("cview\\('");
+//		replaceRegexList.add("\\);return false;");
+//		
+//		String pattern = "cview\\(([^<]*?)\\);return false;"; 
+//		
+//		return RegUtil.getRegexList(content, pattern, replaceRegexList, "");
+//	}
 		
 	private List<String> getNameList(String content) {
 		List<String> replaceRegexList = new ArrayList<String>();
@@ -71,7 +74,7 @@ public class Detail {
 		clearChapters();
 
 		content = getDetailContent();
-		url = getUrlList(content);
+		url = //getUrlList(content);
 		name = getNameList(content);
 		
 		// 最新一集例外處理

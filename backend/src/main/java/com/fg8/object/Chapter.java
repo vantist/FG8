@@ -1,7 +1,10 @@
-package com.fg8.utils;
+package com.fg8.object;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.fg8.utils.RegUtil;
+import com.fg8.utils.WebUtil;
 
 public class Chapter {
 	private String url;

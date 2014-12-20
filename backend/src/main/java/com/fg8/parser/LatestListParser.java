@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.fg8.utils.Comic;
-import com.fg8.utils.Detail;
+import com.fg8.object.Comic;
+import com.fg8.object.Detail;
 import com.fg8.utils.RegUtil;
 import com.fg8.utils.WebUtil;
 
-public class ComicLatestParser {
+public class LatestListParser {
 	private final long mRefreshInterval = 300000;
 	private final String mUpdateURL = "http://www.8comic.com/comic/u-?.html";
 	private final String mUrlReplaceStr = "?";
@@ -17,8 +17,7 @@ public class ComicLatestParser {
 	private List<String> mLatestComicPageList = new ArrayList<String>();
 	private long mLatestRefreshTime = 0;
 	
-	public ComicLatestParser() {
-		refresh();
+	public LatestListParser() {
 	}
 	
 	// unusable

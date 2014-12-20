@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fg8.parser.ComicLatestParser;
-import com.fg8.utils.Comic;
+import com.fg8.handler.LatestListHandler;
+import com.fg8.object.Comic;
 
 @Controller
 @RequestMapping("/comic")
@@ -16,7 +16,7 @@ public class ComicController {
 
 	@RequestMapping(value = "/latest", method = RequestMethod.GET)
 	public @ResponseBody List<Comic> getLstestComicList() {
-		ComicLatestParser comicLatestParser = new ComicLatestParser();
-		return comicLatestParser.getLatestComicList();
+		LatestListHandler latestListHandler = new LatestListHandler();
+		return latestListHandler.refresh();
 	}
 }
