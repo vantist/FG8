@@ -1,18 +1,26 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/core-image/core-image.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
 
 <polymer-element name="comic-grid-2" attributes="comic" noscript>
 	<template>
 		<style type="text/css">
-			.grid2 { 
-				width: 14%;
-				height: 160px;
-
-				padding: 10px;
-
-				text-align: center;
-				display: inline-block;
+			paper-button {
+				width: 15.5%;
+				height: 250px;
+				margin: 10px 5px;
 			}
 		</style>
-		<div class="grid2">{{comic}}</div>
+
+		<paper-button raised>
+			<core-menu>
+			    <paper-item>{{comic.update}}</paper-item>
+			    <paper-item>
+			    	<core-image style="width:160px; height:160px;" sizing="cover" fade src="{{comic.picUrl}}"></core-image>
+				</paper-item>
+			    <paper-item>{{comic.name}}</paper-item>
+			</core-menu>
+		</paper-button>
 	</template>
 </polymer-element>
