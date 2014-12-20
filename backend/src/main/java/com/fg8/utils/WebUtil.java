@@ -38,7 +38,7 @@ public class WebUtil {
 			}
 			
 			if (debugMode)
-				System.out.println(urlString + " ºô­¶Åª¨ú®É¶¡ : " + (System.currentTimeMillis() - startTime));
+				System.out.println(urlString + " ç¶²é è®€å–æ™‚é–“ : " + (System.currentTimeMillis() - startTime));
 			startTime = System.currentTimeMillis();
 			
 			StringBuffer sbf = new StringBuffer();
@@ -49,7 +49,7 @@ public class WebUtil {
 			content = sbf.toString();
 			
 			if (debugMode)
-				System.out.println(urlString + " ¦r¦ê²Õ¦¨®É¶¡ : " + (System.currentTimeMillis() - startTime));
+				System.out.println(urlString + " å­—ä¸²çµ„æˆæ™‚é–“ : " + (System.currentTimeMillis() - startTime));
 			
 		} catch (Exception e) {
 			e.printStackTrace();

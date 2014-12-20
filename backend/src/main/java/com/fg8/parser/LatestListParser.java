@@ -28,7 +28,7 @@ public class LatestListParser {
 		return false;
 	}
 	
-	// Â^¨ú http://www.8comic.com/comic/u-(1~5).html ¤ºªººô­¶¸ê®Æ
+	// ï¿½^ï¿½ï¿½ http://www.8comic.com/comic/u-(1~5).html ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	private List<String> getLatestComicHTML() {
 		if (!mLatestComicPageList.isEmpty() && !isOverRefreshInterval()) {
 			return mLatestComicPageList;
@@ -46,13 +46,13 @@ public class LatestListParser {
 		return mLatestComicPageList;
 	}
 	
-	// ¨ú±o comic ªº url
+	// ï¿½ï¿½o comic ï¿½ï¿½ url
 	private List<String> parseComicURL(List<String> latestPageList) {
 		List<String> replaceRegexList = new ArrayList<String>();
-		replaceRegexList.add("<td height=\"30\" nowrap> ¡P <a href='");
+		replaceRegexList.add("<td height=\"30\" nowrap> Â· <a href='");
 		replaceRegexList.add("' >");
 		
-		String pattern = "<td height=\"30\" nowrap> ¡P <a href='[^<]*?' >"; 
+		String pattern = "<td height=\"30\" nowrap> Â· <a href='[^<]*?' >"; 
 		
 		List<String> urlList = new ArrayList<String>();
 		
@@ -64,13 +64,13 @@ public class LatestListParser {
 		return urlList;
 	}
 	
-	// ¨ú±o comic ªº¦WºÙ
+	// ï¿½ï¿½o comic ï¿½ï¿½ï¿½Wï¿½ï¿½
 	private List<String> parseComicName(List<String> latestPageList) {
 		List<String> replaceRegexList = new ArrayList<String>();
-		replaceRegexList.add("<td height=\"30\" nowrap> ¡P <a href='[^<]*?' >");
+		replaceRegexList.add("<td height=\"30\" nowrap> Â· <a href='[^<]*?' >");
 		replaceRegexList.add("</a>");
 		
-		String pattern = "<td height=\"30\" nowrap> ¡P <a href='[^<]*?' >[^<]*?</a>";
+		String pattern = "<td height=\"30\" nowrap> Â· <a href='[^<]*?' >[^<]*?</a>";
 		
 		List<String> nameList = new ArrayList<String>();
 		
@@ -82,7 +82,7 @@ public class LatestListParser {
 		return nameList;
 	}
 	
-	// ¨ú±o comic ªº§ó·s¤é´Á
+	// ï¿½ï¿½o comic ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½
 	private List<String> parseComicUpdateDateList(List<String> latestPageList) {
 		List<String> replaceRegexList = new ArrayList<String>();
 		replaceRegexList.add("<td align=\"right\" nowrap>");
