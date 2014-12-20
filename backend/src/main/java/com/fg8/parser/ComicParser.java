@@ -28,11 +28,27 @@ public class ComicParser {
 	public List<String> parseAllEpisodeUrl(String comicPageHTML) {
 		List<String> replaceRegexList = new ArrayList<String>();
 		replaceRegexList.add("cview\\('");
-		replaceRegexList.add("\\);return false;");
+		replaceRegexList.add("',13\\);return false;");
 		
-		String pattern = "cview\\(([^<]*?)\\);return false;"; 
+		String pattern = "cview\\(([^<]*?)',13\\);return false;";
 		
 		return RegUtil.getRegexList(comicPageHTML, pattern, replaceRegexList, "");
+	}
+	
+	public List<String> parseAllEpisodeName(String comicPageHTML) {
+		List<String> replaceRegexList = new ArrayList<String>();
+		replaceRegexList.add("cview\\(([^<])*?\\);return false;\" id=\"([^\"])*?\" class=\"([^\"])*?\">");
+		replaceRegexList.add("</a>");
+		
+		String pattern = "cview\\(([^<])*?\\);return false;\" id=\"([^\"])*?\" class=\"([^\"])*?\">.*?</a>";
+
+		List<String> allEpisodeName = RegUtil.getRegexList(comicPageHTML, pattern, replaceRegexList, "");
+		
+		// the latest episode's name is diff with other
+		if (allEpisodeName.size() > 0)
+			allEpisodeName.set(allEpisodeName.size()-1, allEpisodeName.get(allEpisodeName.size()-1).replaceAll("<font ([^>])*?>", "").replaceAll("<img(.)*?>", "").replaceAll("</font>", "").replaceAll("<script>(.)*?</script>", ""));
+		
+		return allEpisodeName;
 	}
 	
 //	public String parseEpisode(String comicPageHTML) {
