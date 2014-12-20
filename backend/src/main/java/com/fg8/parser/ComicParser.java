@@ -25,12 +25,39 @@ public class ComicParser {
 //		
 //	}
 	
+	public List<String> convertEpisodeUrl(List<String> episodeUrlList) {
+		int catId;
+		String baseUrl = "";
+		String newUrl = "";
+		List<String> newEpisodeUrlList = new ArrayList<String>();
+		
+		for (String url : episodeUrlList) {
+			catId = Integer.valueOf(url.split(",")[1]);
+			baseUrl = "http://new.comicvip.com/show/cool-";
+			if (catId == 4 || catId == 6 || catId == 12 || catId == 22)
+				baseUrl = "http://new.comicvip.com/show/cool-";
+			else if (catId == 1 || catId == 17 || catId == 19 || catId == 21)
+				baseUrl = "http://new.comicvip.com/show/cool-";
+			else if (catId == 2 || catId == 5 || catId == 7 || catId == 9)  
+				baseUrl = "http://new.comicvip.com/show/cool-";
+			else if (catId == 10 || catId == 11 || catId == 13 || catId == 14) 
+				baseUrl = "http://new.comicvip.com/show/best-manga-";
+			else if (catId == 3 || catId == 8 || catId == 15 || catId == 16 || catId == 18 || catId == 20)
+				baseUrl = "http://new.comicvip.com/show/best-manga-";
+			
+			newUrl = baseUrl + url.split(",")[0].replace(".html'", "").replace("-", ".html?ch=");
+			newEpisodeUrlList.add(newUrl);
+		}
+		
+		return newEpisodeUrlList;
+	}
+	
 	public List<String> parseAllEpisodeUrl(String comicPageHTML) {
 		List<String> replaceRegexList = new ArrayList<String>();
 		replaceRegexList.add("cview\\('");
-		replaceRegexList.add("',13\\);return false;");
+		replaceRegexList.add("\\);return false;");
 		
-		String pattern = "cview\\(([^<]*?)',13\\);return false;";
+		String pattern = "cview\\(([^<]*?)\\);return false;";
 		
 		return RegUtil.getRegexList(comicPageHTML, pattern, replaceRegexList, "");
 	}
