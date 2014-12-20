@@ -17,9 +17,9 @@ public class Chapter {
 		System.out.println(this.url);
 	}
 	
-	private String getPicContent() {
-		return WebUtil.getUrlContent(url);
-	}
+//	private String getPicContent() {
+//		return WebUtil.getUrlContent(url);
+//	}
 	
 	private void addPicUrl(String picUrl) {
 		picUrlList.add(picUrl);
@@ -29,10 +29,10 @@ public class Chapter {
 		picUrlList.clear();
 	}
 	
-	private String ss(String a, int b, int c, Boolean d) {
-		String e = a.substring(b, b + c);
-		return d ? e.replaceAll("[a-z]*", "") : e;
-	}
+//	private String ss(String a, int b, int c, Boolean d) {
+//		String e = a.substring(b, b + c);
+//		return d ? e.replaceAll("[a-z]*", "") : e;
+//	}
 	
 	private String nn(int n) {
 		return n < 10 ? ("00" + n) : n < 100 ? ("0" + n) : Integer.toString(n); 

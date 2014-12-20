@@ -14,9 +14,8 @@ public class Episode {
 	
 	public Episode() {}
 	
-	public Episode(int id, int index, int pageNumber, long updateDate,
+	public Episode(int index, int pageNumber, long updateDate,
 			String name, String url, List<String> imageUrlList) {
-		this.id = id;
 		this.index = index;
 		this.pageNumber = pageNumber;
 		this.updateDate = updateDate;

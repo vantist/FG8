@@ -3,14 +3,37 @@ package com.fg8.parser;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fg8.object.Detail;
 import com.fg8.object.Episode;
 import com.fg8.utils.RegUtil;
+import com.fg8.utils.TimerUtil;
 import com.fg8.utils.WebUtil;
 
 public class ComicParser {
 	String url = "http://www.8comic.com/html/8279.html";
+	List<Episode> mEpisodeList;
 	
+	public List<Episode> getEpisodeList(String comicUrl) {
+		if (mEpisodeList != null)
+			mEpisodeList.clear();
+		else
+			mEpisodeList = new ArrayList<Episode>();
+		
+		String comicPageHTML = getComicPageHTML(comicUrl);
+		List<String> allEpisodeUrlList = getFullAllEpisodeUrl(comicPageHTML);
+		List<String> allEpisodeNameList = parseAllEpisodeName(comicPageHTML);
+		
+		if (allEpisodeUrlList.size() != allEpisodeNameList.size())
+			System.out.println("allEpisodeUrlList.size():" + allEpisodeUrlList.size() + " != allEpisodeNameList.size():" + allEpisodeNameList.size());
+		
+		for (int i = 0; i < allEpisodeUrlList.size(); i++) {
+			String episodeUrl = allEpisodeUrlList.get(i);
+			String episodeName = allEpisodeNameList.get(i);
+			Episode episode = parseEpisode(episodeUrl, episodeName);
+			mEpisodeList.add(episode);
+		}
+		
+		return mEpisodeList;
+	}
 	
 	public String getComicPageHTML(String comicUrl) {
 		String comicPageHTML = WebUtil.getUrlContent(comicUrl);
@@ -24,6 +47,12 @@ public class ComicParser {
 //	public String parseChapter(String comicPageHTML) {
 //		
 //	}
+	
+	public List<String> getFullAllEpisodeUrl(String comicPageHTML) {
+		List<String> rawEpisodeUrl = parseAllEpisodeUrl(comicPageHTML);
+		List<String> fullEpisodeUrl = convertEpisodeUrl(rawEpisodeUrl);
+		return fullEpisodeUrl;
+	}
 	
 	public List<String> convertEpisodeUrl(List<String> episodeUrlList) {
 		int catId;
@@ -78,9 +107,12 @@ public class ComicParser {
 		return allEpisodeName;
 	}
 	
-//	public String parseEpisode(String comicPageHTML) {
-//		Episode espisode = new Episode();
-//		
-//		
-//	}
+	public Episode parseEpisode(String episodeUrl, String episodeName) {
+		int index = Integer.parseInt(episodeUrl.split("ch=")[1]);
+		long updateDate = TimerUtil.getCurrentTime();
+		List<String> imageUrlList = new ImageListParser().getImageList(episodeUrl);
+		
+		Episode espisode = new Episode(index, imageUrlList.size(), updateDate, episodeName, episodeUrl, imageUrlList);
+		return espisode;
+	}
 }
