@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 import com.fg8.object.Comic;
-import com.fg8.object.Detail;
 import com.fg8.utils.RegUtil;
 import com.fg8.utils.WebUtil;
 
@@ -100,9 +99,8 @@ public class LatestListParser {
 		return updateDateList;
 	}
 	
-	private Comic createComic(String url, String name, String update, String picUrl) {
-		Detail detail = new Detail(url);
-		Comic comic = new Comic(name, url, update, picUrl, detail);
+	private Comic createComic(int id, String comicUrl, String comicName, String update, String picUrl) {
+		Comic comic = new Comic(id, comicName, comicUrl, update, picUrl, "", null, null);
 		
 		return comic;
 	}
@@ -136,10 +134,13 @@ public class LatestListParser {
 		updateList = parseComicUpdateDateList(latestComicPage);
 		
 		for (int i = 0; i < urlList.size(); i++) {
-			picUrl = "http://www.8comic.com/pics/0/" + urlList.get(i).replaceAll("/html/", "").replace(".html", "") + ".jpg";
-			newUrl = "http://www.8comic.com" + urlList.get(i);
+			String comicUrl = urlList.get(i);
+			int id = Integer.parseInt(comicUrl.replaceAll("\\D", ""));
 			
-			Comic comic = createComic(newUrl, nameList.get(i), updateList.get(i), picUrl);
+			picUrl = "http://www.8comic.com/pics/0/" + comicUrl.replaceAll("/html/", "").replace(".html", "") + ".jpg";
+			newUrl = "http://www.8comic.com" + comicUrl;
+			
+			Comic comic = createComic(id, newUrl, nameList.get(i), updateList.get(i), picUrl);
 			addComic(comic);
 		}
 		
