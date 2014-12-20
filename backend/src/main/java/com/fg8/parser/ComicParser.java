@@ -35,7 +35,7 @@ public class ComicParser {
 		String picUrl = getComicPicUrl(comicID);
 		String author = parseAuthor(comicPageHTML);
 		Detail detail = parseDetail(comicPageHTML);
-		List<Episode> episodeList = getEpisodeList(comicUrl);
+		List<Episode> episodeList = getEpisodeLiteList(comicUrl);
 		
 		Comic comic = new Comic(comicID, name, comicUrl, updateDate, picUrl, author, detail, episodeList);
 		return comic;
@@ -98,7 +98,7 @@ public class ComicParser {
 		return detail;
 	}
 	
-	public List<Episode> getEpisodeList(String comicUrl) {
+	public List<Episode> getEpisodeLiteList(String comicUrl) {
 		if (mEpisodeList != null)
 			mEpisodeList.clear();
 		else
@@ -114,7 +114,8 @@ public class ComicParser {
 		for (int i = 0; i < allEpisodeUrlList.size(); i++) {
 			String episodeUrl = allEpisodeUrlList.get(i);
 			String episodeName = allEpisodeNameList.get(i);
-			Episode episode = parseEpisode(episodeUrl, episodeName);
+			int index = Integer.parseInt(episodeUrl.split("ch=")[1]);
+			Episode episode = new Episode(index, 0, 0, episodeName, episodeUrl, null);
 			mEpisodeList.add(episode);
 		}
 		
@@ -189,6 +190,7 @@ public class ComicParser {
 		
 		return allEpisodeName;
 	}
+	
 	
 	public Episode parseEpisode(String episodeUrl, String episodeName) {
 		int index = Integer.parseInt(episodeUrl.split("ch=")[1]);
