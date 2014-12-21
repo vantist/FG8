@@ -19,11 +19,20 @@ repositories {
 //Project dependencies
 dependencies {
 	compile 'junit:junit:4.12'
-	compile 'org.hibernate:hibernate-core:4.3.7.Final'
 	compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.13'
 	compile 'ch.qos.logback:logback-classic:1.1.2'
 	compile 'org.springframework:spring-webmvc:4.0.6.RELEASE'
 	compile 'jstl:jstl:1.2'
+	compile 'org.codehaus.jettison:jettison:1.3.7'
+	compile 'org.apache.oltu.oauth2:org.apache.oltu.oauth2.client:1.0.0'
+	compile 'org.apache.oltu.oauth2:org.apache.oltu.oauth2.common:0.31'
+	compile 'org.hibernate:hibernate-core:4.3.7.Final'	
+// http://www.concretepage.com/spring-4/spring-4-hibernate-4-gradle-integration-example-using-annotation
+   compile 'org.slf4j:slf4j-simple:1.7.7'
+   compile 'org.javassist:javassist:3.15.0-GA'
+   compile 'mysql:mysql-connector-java:5.1.31'
+   compile 'commons-dbcp:commons-dbcp:1.4' 
+   
 	//include in compile only, exclude in the war
 	providedCompile 'javax.servlet:servlet-api:2.5'
 }
