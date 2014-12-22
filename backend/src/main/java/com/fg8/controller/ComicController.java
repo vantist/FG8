@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fg8.handler.AllComicsHandler;
 import com.fg8.handler.ComicHandler;
 import com.fg8.handler.LatestListHandler;
 import com.fg8.object.Comic;
+import com.fg8.object.ComicsList;
 import com.fg8.object.Episode;
 
 @Controller
@@ -34,5 +36,11 @@ public class ComicController {
 	public @ResponseBody List<Comic> getLstestComicList() {
 		LatestListHandler latestListHandler = new LatestListHandler();
 		return latestListHandler.refresh();
+	}
+
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
+	public @ResponseBody ComicsList getAllComics() {
+		AllComicsHandler allComicsHandler = new AllComicsHandler();
+		return allComicsHandler.getAllComics();
 	}
 }

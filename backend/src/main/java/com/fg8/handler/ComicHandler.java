@@ -2,17 +2,20 @@ package com.fg8.handler;
 
 import java.util.List;
 
+import com.fg8.firebase.AllComicsFirebase;
 import com.fg8.object.Comic;
 import com.fg8.object.Episode;
 import com.fg8.parser.ComicParser;
 
 public class ComicHandler {
+	AllComicsFirebase mAllComicsFirebase = new AllComicsFirebase();
 	private ComicParser mComicParser = new ComicParser();
 	
 	public Comic getComic(int comicID) {
 		Comic comic = null;
 		
 		comic = mComicParser.getComic(comicID);
+		mAllComicsFirebase.saveComic(comic);
 		
 		return comic;
 	}
