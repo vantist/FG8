@@ -3,38 +3,27 @@ package com.fg8.firebase;
 import com.fg8.object.Comic;
 import com.fg8.object.ComicsList;
 import com.fg8.utils.FirebaseUtil;
-import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
-import com.firebase.client.ValueEventListener;
 
 public class AllComicsFirebase {
-	ComicsList mAllComics = null;
-
+	private static final String URL_END = ".json";
+	private static final String ALL_COMICS_URL = "https://fg8.firebaseio.com/ComicsList";
+	private static final String COMIC_URL = "https://fg8.firebaseio.com/ComicsList/";
+	
+		Comic mComic = null;
+	
 	public ComicsList getAllComicsList() {
-		Firebase firebaseRef = FirebaseUtil.getFirebase();
-		
-		firebaseRef.addValueEventListener(new ValueEventListener() {
-			@Override
-			public void onDataChange(DataSnapshot dataSnap) {
-				mAllComics = (ComicsList) dataSnap.getValue(ComicsList.class);
-				System.out.println(mAllComics);
-			}
-			
-			@Override
-			public void onCancelled(FirebaseError error) {
-				
-			}
-		});
-		
-		if (mAllComics == null)
-			mAllComics = new ComicsList();
-		
-		return mAllComics;
+		String url = ALL_COMICS_URL.concat(URL_END);
+		String allComicsJson = FirebaseUtil.getFirebaseRawDataFromRest(url);
+		ComicsList allComics = new ComicsList(allComicsJson);
+		return allComics;
 	}
 	
-	public void getComic(int comicID) {
-		
+	public Comic getComic(int comicID) {
+		String url = COMIC_URL.concat(Integer.toString(comicID)).concat(URL_END);
+		String comicJson = FirebaseUtil.getFirebaseRawDataFromRest(url);
+		Comic comic = Comic.getComic(comicJson);
+		return comic;
 	}
 	
 	public void saveComic(Comic comic) {

@@ -14,8 +14,13 @@ public class ComicHandler {
 	public Comic getComic(int comicID) {
 		Comic comic = null;
 		
-		comic = mComicParser.getComic(comicID);
-		mAllComicsFirebase.saveComic(comic);
+		comic = mAllComicsFirebase.getComic(comicID);
+		
+		if (comic == null) {
+			System.err.println("ComicHandler.getComic() : " + comicID + " is not in database.");
+			comic = mComicParser.getComic(comicID);
+			mAllComicsFirebase.saveComic(comic);
+		}
 		
 		return comic;
 	}

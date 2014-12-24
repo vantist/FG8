@@ -3,6 +3,7 @@ package com.fg8.object;
 import java.util.List;
 
 import com.fg8.utils.TimerUtil;
+import com.google.gson.Gson;
 
 public class Comic {
 	private int id;
@@ -53,6 +54,12 @@ public class Comic {
 		builder.append("]");
 		return builder.toString();
 	}
+	
+	public static Comic getComic(String json) {
+		Comic comic = new Gson().fromJson(json, Comic.class);
+		return comic;
+	}
+
 
 	public int getId() {
 		return id;
