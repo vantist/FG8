@@ -1,9 +1,13 @@
 package com.fg8.object;
 
+import java.io.IOException;
 import java.util.List;
 
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
+
 import com.fg8.utils.TimerUtil;
-import com.google.gson.Gson;
 
 public class Comic {
 	private int id;
@@ -56,7 +60,17 @@ public class Comic {
 	}
 	
 	public static Comic getComic(String json) {
-		Comic comic = new Gson().fromJson(json, Comic.class);
+		ObjectMapper mapper = new ObjectMapper();
+		Comic comic = null;
+		try {
+			comic = mapper.readValue(json, Comic.class);
+		} catch (JsonParseException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return comic;
 	}
 

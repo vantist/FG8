@@ -1,11 +1,16 @@
 package com.fg8.object;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.type.TypeReference;
+
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
-import com.google.gson.Gson;
 
 @JsonAutoDetect(fieldVisibility = Visibility.ANY)
 public class ComicsList {
@@ -24,10 +29,18 @@ public class ComicsList {
 		ComicsList = new HashMap<String, Comic>();
 	}
 	
-	@SuppressWarnings("unchecked")
 	public ComicsList(String json) {
 		ComicsList = new HashMap<String, Comic>();
-		ComicsList = (Map<String, Comic>) new Gson().fromJson(json, ComicsList.getClass());
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			ComicsList = mapper.readValue(json, new TypeReference<HashMap<String, Comic>>(){});
+		} catch (JsonParseException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void addComicsList(Map<String, Comic> comicsList) {

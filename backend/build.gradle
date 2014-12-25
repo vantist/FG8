@@ -26,7 +26,6 @@ dependencies {
 	compile 'org.codehaus.jettison:jettison:1.3.7'
 	compile 'org.apache.oltu.oauth2:org.apache.oltu.oauth2.client:1.0.0'
 	compile 'org.apache.oltu.oauth2:org.apache.oltu.oauth2.common:0.31'
-	compile 'com.google.code.gson:gson:2.3.1'
 	//Firebase
 	compile 'com.firebase:firebase-client-android:2.0.3'
    
